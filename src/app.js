@@ -1,6 +1,6 @@
-const express = require('express');
-// Para evitar problemas con directortios en Sistemas operativos
+// path->Para evitar problemas con directortios en Sistemas operativos
 const path = require('path');
+const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const app = express();
@@ -8,7 +8,7 @@ const app = express();
 //Connecting to BD
 mongoose.connect('mongodb://localhost/crud-mongo')
     .then(db => console.log('DB Connected'))
-    .catch(err =>console.log(err));
+    .catch(err =>console.log(err));;
 
 //  Importing Routes
 const indexRoutes = require('./routes/index')
@@ -16,7 +16,9 @@ const indexRoutes = require('./routes/index')
 //  Settings
 app.set('port',process.env.PORT || 3000);
 app.set('views', path.join(__dirname + '/views'));
+app.use(express.static('public'));
 app.set('view engine','ejs');
+
 
 //  Middelwares -> es una función que se ejecuta antes de que llegue a las rutas
 app.use(morgan('dev'));
